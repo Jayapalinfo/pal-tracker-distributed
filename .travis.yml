@@ -21,10 +21,10 @@ jobs:
       install: skip
       before_script:
         - mysql -uroot < databases/create_databases.sql
-        - ./gradlew testMigrate
+        - chmod +x ./gradlew testMigrate
       script:
         - APPLICATION=allocations
-        - ./gradlew clean :applications:${APPLICATION}-server:build
+        - chmod +x ./gradlew clean :applications:${APPLICATION}-server:build
       before_deploy:
         - git config --local user.name "Travis CI"
         - git config --local user.email "travis@example.com"
