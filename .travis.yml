@@ -21,7 +21,7 @@ jobs:
       install: skip
       before_script:
         - mysql -uroot < databases/create_databases.sql
-        - ./gradlew testMigrate
+        - chmod +x ./gradlew testMigrate
       script:
         - APPLICATION=allocations
         - chmod +x ./gradlew clean :applications:${APPLICATION}-server:build
