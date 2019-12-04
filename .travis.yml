@@ -1,5 +1,5 @@
 dist: trusty
-sudo: false
+sudo: required
 notifications:
   email: false
 env:
@@ -21,11 +21,10 @@ jobs:
       install: skip
       before_script:
         - mysql -uroot < databases/create_databases.sql
-        - curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/5.1.1/flyway-commandline-5.1.1-linux-x64.tar.gz | tar xvz
-        - flyway-*/flyway -url="jdbc:mysql://localhost:3306/tracker_test" -locations=filesystem:databases/tracker -user=tracker -password= clean migrate
-      script:
         - chmod +x ./gradlew testMigrate
-        - chmod +x ./gradlew clean :applications:allocations-server:build
+      script:
+        - APPLICATION=allocations
+        - chmod +x ./gradlew clean :applications:${APPLICATION}-server:build
       before_deploy:
         - git config --local user.name "Travis CI"
         - git config --local user.email "travis@example.com"
