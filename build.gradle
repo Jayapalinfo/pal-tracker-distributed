@@ -17,6 +17,7 @@ buildscript {
     }
 
     repositories {
+        maven { url "http://platform-acceleration-lab-maven.s3.amazonaws.com" }
         mavenCentral()
         jcenter()
     }
@@ -24,10 +25,21 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
         classpath "mysql:mysql-connector-java:$mysqlVersion"
+        classpath "io.pivotal.pal.assignments:assignments-plugin:4.3.1"
     }
 }
 
 apply plugin: DependenciesGraphPlugin
+apply plugin: "io.pivotal.pal.assignments.plugin"
+
+
+assignments {
+    apiUrl = "https://cognizant-waveland.education.pivotal.io"
+    emails = [
+            "jayapal.karuppanadar@cognizant.com"
+    ]
+    cohortIdentifier = "pcf-training"
+}
 
 subprojects {
     group "io.pivotal.pal.tracker"
@@ -57,3 +69,4 @@ subprojects {
         }
     }
 }
+defaultTasks "tasks"
