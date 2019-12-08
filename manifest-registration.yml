@@ -10,3 +10,5 @@ applications:
     JAVA_OPTS: '-Xmx250m -Xss100m'
   services:
   - tracker-registration-database
+  - tracker-service-registry
+  - tracker-circuit-breaker-dashboard
